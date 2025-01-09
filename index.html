@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+          margin: 0;
+          padding: 0;
+        }
+        
+        button:hover {
+         background-color: rgb(49, 59, 47);
+         color: rgb(128, 160, 121);
+        }
+
+        .CalculatorFrame {
+           width: 30%;
+           height: 75vh;
+           margin: auto;
+           display: flex;
+           align-items: center;
+           justify-content: space-evenly;
+           flex-direction: column;
+           background-color: rgb(101, 148, 101);
+           border-radius: 25px;
+           position: relative;
+        }
+        
+       .OUTPUT {
+          width: 80%;
+          height: 10%;
+          margin: 0 auto;
+          background-color: rgb(78, 78, 78);
+          color: azure;
+          padding: 5%;
+          border-radius: 25px;
+          font-size: xx-large;
+          font-family: 'Courier New', monospace;
+       }
+
+       .Btns {
+          width: 80%;
+          height: 65%;
+          margin: 0 auto;
+          padding: 5%;
+          background-color: rgb(73, 107, 73);
+          border-radius: 25px;
+          display: flex;
+          align-items: start;
+          justify-content: space-between;
+       }
+
+       .NumBtns {
+          width: 65%;
+          height: 100%;
+          background-color: rgb(105, 150, 105);
+          border-radius: 25px;
+          display: flex;
+          align-items: start;
+          justify-content: space-evenly;
+          flex-wrap: wrap;
+          gap:5%;
+       }
+       
+       .NUMBER {
+          width: 25%;
+          height: 20%;
+          background-color: rgb(133, 189, 133);
+          border-radius: 25px;
+          border: 10px solid rgb(75, 107, 75);
+          color: rgb(67, 83, 60);
+          font-size: xx-large;
+         
+       }
+       .side {
+          width: 35%;
+          height: 100%;
+          display: flex;
+          align-items: end;
+          justify-content: space-between;
+          flex-direction: column;
+          border-radius: 25px;
+          
+       }
+
+        .OperationBtns    {
+           width: 90%;
+           height: 50%;
+           order: 2;
+           background-color: rgb(105, 150, 105);
+           border-radius: 25px;
+           list-style-type: none;
+           display: flex;
+           flex-direction: column;
+           align-items: center;
+           justify-content:space-evenly;
+       }
+       
+       .OperationBtns li {
+
+         width: 90%;
+         height:15%;
+         background-color: rgb(70, 102, 70);
+         border-radius: 10px;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         font-size: 30px;
+         color: rgb(167, 182, 150);
+         
+       }
+        .DeleteBtns {
+          order: 1;
+          width: 90%;
+          height: 20%;
+          background-color: rgb(105, 150, 105);
+          border-radius: 25px;
+          display: flex;
+          align-items: center;
+          justify-content: space-evenly;
+       }
+
+       .DeleteBtns button {
+         width: 45%;
+         height: 90%;
+         border-radius: 15px;
+         border: none;
+         background-color: rgb(73, 107, 73);
+         color: rgb(131, 189, 131);
+         font-size: xx-large;
+       }
+      
+       .SUBMIT {
+         order: 3;
+         width: 90%;
+         height: 25%;
+         background-color: rgb(105, 150, 105);
+         border-radius: 15px;
+         border: none;
+         color: rgb(62, 87, 62);
+         font-size: xx-large;
+       }
+    </style>
+    <title>Calculator</title>
+</head>
+<body>
+     <main>
+        <div class="CalculatorFrame">
+            <h2 class="OUTPUT"></h2>
+            <aside class="Btns">
+              <div class="NumBtns">
+                 <button class="NUMBER">1</button>
+                  <button class="NUMBER">2</button>
+                   <button class="NUMBER">3</button>
+                    <button class="NUMBER">4</button>
+                     <button class="NUMBER">5</button>
+                  <button class="NUMBER">6</button>
+                  <button class="NUMBER">7</button>
+                   <button class="NUMBER">8</button>
+                    <button class="NUMBER">9</button>
+                     <button class="NUMBER">0</button>
+              </div>
+              <aside class ="side">
+              <div class="DeleteBtns">
+               
+               <button class="CLEAR">CA</button>
+               <button class="DELETE">Del</button>
+              </div>
+              <ul class="OperationBtns">
+               <li class="Operator">/</li>
+               <li class="Operator">*</li>
+               <li class="Operator">-</li>
+               <li class="Operator">+</li>
+              </ul>
+              <button class="SUBMIT"><b>Submit</b></button>
+              </aside>
+            </aside>
+        </div>
+     </main>
+     <script>
+      const NUMs =  document.querySelectorAll(".NUMBER")
+      const OPERATEs =  document.querySelectorAll(".Operator")
+
+      const SUBMIT = document.querySelector(".SUBMIT")
+      const DEL = document.querySelector(".DELETE")
+      const CA = document.querySelector(".CLEAR")
+
+      const OUTPUT = document.querySelector(".OUTPUT")
+
+   
+      NUMs.forEach(function(currentBtn) {
+        currentBtn.addEventListener("click", function() {
+         OUTPUT.innerText += currentBtn.innerText
+         OUTPUT.style.textAlign = "left"
+    
+    });
+   });
+
+     OPERATEs.forEach(function(currentOP) {
+        currentOP.addEventListener("click", function() {
+         OUTPUT.innerText += currentOP.innerText
+         OUTPUT.style.textAlign = "left"
+    });
+   });
+
+   DEL.addEventListener("click", function(){
+      let currentValue = OUTPUT.innerText
+       console.log("DEL")
+      OUTPUT.innerText = currentValue.slice(0, -1)
+
+   })
+
+    CA.addEventListener("click", function(){
+      OUTPUT.innerText = ""
+
+   })
+
+     SUBMIT.addEventListener("click", function(){
+       let ANS = eval(OUTPUT.innerText)
+       
+       OUTPUT.innerText = ANS
+       OUTPUT.style.textAlign = "right"
+
+   })
+
+
+     </script>
+</body>
+</html>
